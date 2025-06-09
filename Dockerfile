@@ -10,4 +10,5 @@ RUN uv pip install --python=/venv/bin/python -r /app/requirements.txt
 
 COPY . /app
 
-CMD ["adk", "web"]
+EXPOSE 8000
+CMD ["adk", "web", "--host", "0.0.0.0", "--port", "8000"]
