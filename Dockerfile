@@ -1,11 +1,11 @@
 FROM python:3.12-slim
 
-WORKDIR /app
+WORKDIR /app/agents
 
 RUN pip install uv
 COPY requirements.txt /app/
-RUN uv venv && uv pip install -r requirements.txt
+RUN uv pip install -r /app/requirements.txt
 
-COPY main.py /app
+COPY . /app
 
-CMD ["uv", "run", "main.py"]
+CMD ["adk", "web"]
