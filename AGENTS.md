@@ -300,6 +300,17 @@ COPY . /app
 CMD ["poetry", "run", "python", "-m", "agents.serve"]
 ```
 
+When using `uv` for packaging, create a virtual environment before installing
+dependencies:
+
+```Dockerfile
+RUN pip install uv
+RUN uv venv /venv
+ENV PATH="/venv/bin:$PATH"
+COPY requirements.txt /app/
+RUN uv pip install --python=/venv/bin/python -r /app/requirements.txt
+```
+
 Multi‑stage builds with `--platform` (amd64/arm64) recommended for CI.
 
 ---
