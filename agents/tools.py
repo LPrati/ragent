@@ -15,4 +15,4 @@ def retrieve_context(query: str, top_k: int = 1) -> list[dict]:
     """Search ChromaDB and return the top‑k docs most relevant to *query*.
     Each dict must include a `page_content` and `source` key so the agent can cite it."""
     results = collection.query(query_texts=[query], n_results=top_k)
-    return results["documents"]
+    return [{"page_content": doc, "source": src} for doc, src in zip(results["documents"][0], results["ids"][0])]
