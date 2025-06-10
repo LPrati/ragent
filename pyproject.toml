@@ -6,4 +6,5 @@ dependencies = [
     "chromadb>=1.0.12",
     "google-adk>=1.2.1",
     "litellm>=1.72.2",
+    "pypdf2>=3.0.1",
 ]
