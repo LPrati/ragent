@@ -5,6 +5,8 @@ import threading
 import chromadb
 import PyPDF2
 
+from google.adk.models.lite_llm import LiteLlm
+
 from sentence_transformers import SentenceTransformer
 
 
@@ -136,3 +138,12 @@ def retrieve_context(query: str, top_k: int = 3, similarity_threshold: float = 0
     logger.info(f"Example: {filtered_results[0]}")
 
     return filtered_results[:top_k]
+
+def expand_query(query: str) -> str:
+    """Expand a query using a LLM."""
+    expander = LiteLlm(model="openai/gpt-4o-mini")
+    expanded_query_response = expander.generate_content_async(
+        f"Expand the following query: {query}"
+    ).text
+    logger.info(f"Expanded query: {expanded_query_response}")
+    return query
